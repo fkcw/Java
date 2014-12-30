@@ -2,6 +2,9 @@ package com.fkcw.pkg;
 class Newpkg{
 	
 }
+class Newpkg2{
+	
+}
 public class Pkg {
 
 	/**
