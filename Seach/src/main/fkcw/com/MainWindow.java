@@ -17,10 +17,10 @@ import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 
 public class MainWindow extends JFrame {
-
-	private JPanel contentPane;
 	private static MainWindow frame;
 
 	/**
@@ -60,18 +60,5 @@ public class MainWindow extends JFrame {
 			}
 		});
 		mnNewMenu.add(btnExit);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 432, Short.MAX_VALUE)
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 263, Short.MAX_VALUE)
-		);
-		contentPane.setLayout(gl_contentPane);
 	}
 }
