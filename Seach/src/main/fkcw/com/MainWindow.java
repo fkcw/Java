@@ -14,11 +14,14 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainWindow extends JFrame {
 
 	private JPanel contentPane;
-	JMenuItem mntmExit;
+	private static MainWindow frame;
 
 	/**
 	 * Launch the application.
@@ -27,7 +30,7 @@ public class MainWindow extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainWindow frame = new MainWindow();
+					frame = new MainWindow();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,21 +53,13 @@ public class MainWindow extends JFrame {
 		JMenu mnNewMenu = new JMenu("File");
 		menuBar.add(mnNewMenu);
 		
-		mntmExit = new JMenuItem("Exit");
-		mntmExit.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				System.out.println(this.getClass());
+		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
 			}
 		});
-		
-		mnNewMenu.add(mntmExit);
-		
-		JMenu mnHelp = new JMenu("Help");
-		menuBar.add(mnHelp);
-		
-		JMenuItem mntmAbout = new JMenuItem("About");
-		mnHelp.add(mntmAbout);
+		mnNewMenu.add(btnExit);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -79,5 +74,4 @@ public class MainWindow extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
-
 }
