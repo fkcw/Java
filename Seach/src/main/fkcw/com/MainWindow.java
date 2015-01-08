@@ -6,15 +6,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MainWindow extends JFrame {
 
 	private JPanel contentPane;
+	JMenuItem mntmExit;
 
 	/**
 	 * Launch the application.
@@ -46,17 +50,15 @@ public class MainWindow extends JFrame {
 		JMenu mnNewMenu = new JMenu("File");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit = new JMenuItem("Exit");
+		mntmExit.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				System.out.println(this.getClass());
+			}
+		});
+		
 		mnNewMenu.add(mntmExit);
-		
-		JMenu mnQuery = new JMenu("Query");
-		menuBar.add(mnQuery);
-		
-		JMenuItem mntmByordernum = new JMenuItem("ByOrderNum");
-		mnQuery.add(mntmByordernum);
-		
-		JMenuItem mntmBycusnum = new JMenuItem("ByCusNum");
-		mnQuery.add(mntmBycusnum);
 		
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
