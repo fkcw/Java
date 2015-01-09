@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.ProgressBarUI;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -27,7 +28,10 @@ import javax.swing.JProgressBar;
 
 public class MainWindow extends JFrame {
 	private static MainWindow frame;
-	JProgressBar progressBar;
+	private static JProgressBar progressBar;
+	static final int da =1000;
+	static final int xiao= 0;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -42,11 +46,17 @@ public class MainWindow extends JFrame {
 				}
 			}
 		});
+
 	}
 
 	/**
 	 * Create the frame.
+	 * @return 
 	 */
+
+	public void UpdatePointer(int i){
+		progressBar.setValue(i);
+	}
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -59,10 +69,11 @@ public class MainWindow extends JFrame {
 		menuBar.add(mnNewMenu);
 		
 		JButton btnExit = new JButton("Exit");
+		
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				for (int i = 0;i<=1000000;i++){
+				for (int i = 0;i<=1000;i++){
 					final int percent =i;
 					
 					SwingUtilities.invokeLater(new Runnable() {
@@ -70,7 +81,7 @@ public class MainWindow extends JFrame {
 						@Override
 						public void run() {
 							// TODO Auto-generated method stub
-							progressBar.setValue(percent);
+							frame.UpdatePointer(percent);
 						}
 					});
 				}
@@ -79,6 +90,8 @@ public class MainWindow extends JFrame {
 		mnNewMenu.add(btnExit);
 		
 		progressBar = new JProgressBar();
+		progressBar.setMaximum(da);
+		progressBar.setMinimum(xiao);
 		getContentPane().add(progressBar, BorderLayout.SOUTH);
 	}
 }
