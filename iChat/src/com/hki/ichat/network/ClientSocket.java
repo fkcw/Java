@@ -1,12 +1,11 @@
 package com.hki.ichat.network;
 
-import java.awt.peer.SystemTrayPeer;
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.sql.Date;
 
 public class ClientSocket extends Thread {
 	private Socket socket;
@@ -16,6 +15,8 @@ public class ClientSocket extends Thread {
 	public void chat(String str){
 		try {
 			socket.getOutputStream().write(str.getBytes());
+			BufferedWriter br = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+			br.newLine();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
