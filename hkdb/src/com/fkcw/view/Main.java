@@ -16,10 +16,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.FlowLayout;
 
 public class Main extends JFrame {
-
-	private JPanel contentPane;
 
 	/**
 	 * Launch the application.
@@ -53,8 +52,14 @@ public class Main extends JFrame {
 		JMenu mnNewMenu = new JMenu("基本信息维护");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem jb_cpmaintain = new JMenuItem("产品信息维护");
-		mnNewMenu.add(jb_cpmaintain);
+		JMenu jmb_cpmaintain = new JMenu("产品信息维护");
+		mnNewMenu.add(jmb_cpmaintain);
+		
+		JMenuItem menuItem = new JMenuItem("添加新产品");
+		jmb_cpmaintain.add(menuItem);
+		
+		JMenuItem menuItem_1 = new JMenuItem("产品信息更新");
+		jmb_cpmaintain.add(menuItem_1);
 		
 		JMenuItem jb_dqmaintain = new JMenuItem("地区模板维护");
 		mnNewMenu.add(jb_dqmaintain);
@@ -75,10 +80,6 @@ public class Main extends JFrame {
 		
 		JMenu menu = new JMenu("?");
 		menuBar.add(menu);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+		getContentPane().setLayout(null);
 	}
-
 }
