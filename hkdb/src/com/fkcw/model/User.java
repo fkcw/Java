@@ -4,6 +4,18 @@ public class User {
 	private int id;
 	private String userName;
 	private String userPass;
+	
+	
+	
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public User(String userName, String userPass) {
+		super();
+		this.userName = userName;
+		this.userPass = userPass;
+	}
 	public int getId() {
 		return id;
 	}

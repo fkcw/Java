@@ -7,18 +7,29 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import com.fkcw.dao.UserDao;
+import com.fkcw.model.User;
+import com.fkcw.util.Dbcon;
+
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import javax.swing.JPasswordField;
 
 public class Login extends JFrame {
+	Dbcon conn = new Dbcon();
+	UserDao userdao=new UserDao();
 
 	private JPanel contentPane;
 	private JTextField usernametxt;
-	private JTextField passtxt;
+	private JPasswordField passtxt;
 
 	/**
 	 * Launch the application.
@@ -48,7 +59,7 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblHkiChinaDb = new JLabel("HKI China DB");
+		JLabel lblHkiChinaDb = new JLabel("SubDB");
 		lblHkiChinaDb.setBounds(166, 50, 86, 14);
 		contentPane.add(lblHkiChinaDb);
 		
@@ -56,11 +67,6 @@ public class Login extends JFrame {
 		usernametxt.setBounds(166, 108, 86, 20);
 		contentPane.add(usernametxt);
 		usernametxt.setColumns(10);
-		
-		passtxt = new JTextField();
-		passtxt.setBounds(166, 146, 86, 20);
-		contentPane.add(passtxt);
-		passtxt.setColumns(10);
 		
 		JLabel lblUser = new JLabel("User:");
 		lblUser.setBounds(55, 111, 46, 14);
@@ -73,6 +79,32 @@ public class Login extends JFrame {
 		JButton jb_login = new JButton("Login");
 		jb_login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String username=new String(usernametxt.getText());
+				String userpass=new String(passtxt.getText());
+				if (username.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Username must be filled!");
+					return;
+				}
+				
+				if (userpass.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Password must be filled!");
+				}
+				User userin = new User(username,userpass);
+				try {
+					User current = userdao.login(conn.getcon(), userin);
+					if (current != null) {
+						
+						JOptionPane.showMessageDialog(null, "Success login");
+					}else{
+						JOptionPane.showMessageDialog(null, "Fail login");
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		jb_login.setBounds(62, 207, 91, 23);
@@ -82,9 +114,9 @@ public class Login extends JFrame {
 		jb_reset.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				String username = usernametxt.getText();
-				String userpass = passtxt.getText();
-				System.out.println(username);
+				usernametxt.setText("");
+				passtxt.setText("");
+				
 			}
 		});
 		jb_reset.addActionListener(new ActionListener() {
@@ -93,5 +125,9 @@ public class Login extends JFrame {
 		});
 		jb_reset.setBounds(281, 207, 91, 23);
 		contentPane.add(jb_reset);
+		
+		passtxt = new JPasswordField();
+		passtxt.setBounds(166, 146, 86, 20);
+		contentPane.add(passtxt);
 	}
 }
