@@ -1,19 +1,26 @@
 package com.fkcw.db;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DBUtil {
+	private static final String URL="jdbc:mysql://localhost:3306/hki_demo";
+	private static final String USER="root";
+	private static final String PASSWORD="password";
 	
-	private static final String DBUrl="jdbc:mysql://127.0.0.1:3306/hki_demo";
-	private static final String DBUsername="root";
-	private static final String DBPassword="password";
-
 	public static void main(String[] args) {
-
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			DriverManager.getConnection(DBUrl, DBUsername, DBPassword);
+			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("Select * from users");
+			while (rs.next()) {
+				System.out.println(rs.getString("name"));
+			}
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -22,5 +29,5 @@ public class DBUtil {
 			e.printStackTrace();
 		}
 	}
-
 }
+
