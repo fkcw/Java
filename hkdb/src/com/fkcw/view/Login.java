@@ -20,8 +20,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
 import java.sql.SQLException;
 import javax.swing.JPasswordField;
+import java.awt.Font;
 
 public class Login extends JFrame {
 	Dbcon conn = new Dbcon();
@@ -51,6 +53,8 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
+		//Set frame location
+		this.setLocationRelativeTo(null);
 		setTitle("HKIDB");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -59,8 +63,9 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblHkiChinaDb = new JLabel("SubDB");
-		lblHkiChinaDb.setBounds(166, 50, 86, 14);
+		JLabel lblHkiChinaDb = new JLabel("Maintain Center");
+		lblHkiChinaDb.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblHkiChinaDb.setBounds(166, 50, 115, 14);
 		contentPane.add(lblHkiChinaDb);
 		
 		usernametxt = new JTextField();
@@ -68,8 +73,8 @@ public class Login extends JFrame {
 		contentPane.add(usernametxt);
 		usernametxt.setColumns(10);
 		
-		JLabel lblUser = new JLabel("User:");
-		lblUser.setBounds(55, 111, 46, 14);
+		JLabel lblUser = new JLabel("Username:");
+		lblUser.setBounds(55, 111, 63, 14);
 		contentPane.add(lblUser);
 		
 		JLabel lblPassword = new JLabel("Password:");
@@ -78,6 +83,8 @@ public class Login extends JFrame {
 		
 		JButton jb_login = new JButton("Login");
 		jb_login.addActionListener(new ActionListener() {
+			private Connection cont;
+
 			public void actionPerformed(ActionEvent arg0) {
 				String username=new String(usernametxt.getText());
 				String userpass=new String(passtxt.getText());
@@ -90,11 +97,16 @@ public class Login extends JFrame {
 					JOptionPane.showMessageDialog(null, "Password must be filled!");
 				}
 				User userin = new User(username,userpass);
+				
 				try {
-					User current = userdao.login(conn.getcon(), userin);
+					cont = conn.getcon();
+					User current = userdao.login(cont, userin);
 					if (current != null) {
 						
-						JOptionPane.showMessageDialog(null, "Success login");
+						Login.this.dispose();
+						new Main().setVisible(true);
+						//JOptionPane.showMessageDialog(null, "Success login");
+						
 					}else{
 						JOptionPane.showMessageDialog(null, "Fail login");
 					}
@@ -104,6 +116,8 @@ public class Login extends JFrame {
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}finally{
+					conn.closecon(cont);
 				}
 			}
 		});
