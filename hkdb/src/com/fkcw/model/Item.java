@@ -1,21 +1,21 @@
 package com.fkcw.model;
 
-public class Itemdetail {
+public class Item {
 	private int id;
-	private String procode;
-	private String area;
-	private String facode;
-	private String classs;
-	private String des;
-	private String des_cn;
-	private String vendor;
-	private double price;
+	private String procode=null;
+	private String area=null;
+	private String facode=null;
+	private String classs=null;
+	private String des=null;
+	private String des_cn=null;
+	private String vendor=null;
+	private double price=0.00;
 	
-	public Itemdetail() {
+	public Item() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Itemdetail(String procode, String area, String facode,
+	public Item(String procode, String area, String facode,
 			String classs, String des, String des_cn, String vendor,
 			double price) {
 		super();

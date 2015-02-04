@@ -56,9 +56,28 @@ public class Main extends JFrame {
 		mnNewMenu.add(jmb_cpmaintain);
 		
 		JMenuItem menuItem = new JMenuItem("添加新产品");
+		menuItem.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent arg0) {
+				 //Frm_Item_Add itemadd = new Frm_Item_Add();
+				 //itemadd.setVisible(true);
+				 //new Ifrm_item_add().setVisible(true);
+				 Ifrm_item_add itemadd = new Ifrm_item_add();
+				 itemadd.setVisible(true);
+				 getContentPane().add(itemadd);
+				
+				 
+			}
+		});
 		jmb_cpmaintain.add(menuItem);
 		
 		JMenuItem menuItem_1 = new JMenuItem("产品信息更新");
+		menuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Ifrm_item_maintain mtview = new Ifrm_item_maintain();
+				mtview.setVisible(true);
+				Main.this.add(mtview);
+			}
+		});
 		jmb_cpmaintain.add(menuItem_1);
 		
 		JMenuItem jb_dqmaintain = new JMenuItem("地区模板维护");
