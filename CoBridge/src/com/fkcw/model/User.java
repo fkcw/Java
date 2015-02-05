@@ -4,6 +4,11 @@ public class User {
 	private String userName;
 	private String userPass;
 	
+	public User(String userName, String userPass) {
+		super();
+		this.userName = userName;
+		this.userPass = userPass;
+	}
 	public String getUserName() {
 		return userName;
 	}

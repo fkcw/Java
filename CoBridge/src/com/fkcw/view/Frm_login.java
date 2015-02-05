@@ -1,23 +1,31 @@
 package com.fkcw.view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JPasswordField;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import com.fkcw.DBUtil.DBUtil;
+import com.fkcw.dao.UserDao;
+import com.fkcw.model.User;
 
 public class Frm_login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField usernametxt;
 	private JPasswordField userpasstxt;
+	private UserDao ud= new UserDao();
+	private DBUtil dbutil = new DBUtil();
 
 	/**
 	 * Launch the application.
@@ -51,11 +59,11 @@ public class Frm_login extends JFrame {
 		contentPane.add(lblCobridge);
 		
 		JLabel lblNewLabel = new JLabel("Username:");
-		lblNewLabel.setBounds(79, 111, 46, 14);
+		lblNewLabel.setBounds(79, 111, 64, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Password:");
-		lblNewLabel_1.setBounds(81, 162, 46, 14);
+		lblNewLabel_1.setBounds(81, 162, 62, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		usernametxt = new JTextField();
@@ -64,6 +72,37 @@ public class Frm_login extends JFrame {
 		usernametxt.setColumns(10);
 		
 		JButton jb_login = new JButton("Login");
+		jb_login.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				User userin = new User(usernametxt.getText(), userpasstxt.getText());
+				Connection con = null;
+				try {
+					con = dbutil.getCon();
+					if (ud.login(con, userin)) {
+						JOptionPane.showMessageDialog(null, "Success Login");
+						Frm_login.this.dispose();
+						new Frm_main().setVisible(true);
+					}else{
+						JOptionPane.showMessageDialog(null, "Error");
+					}
+					
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}finally{
+					try {
+						dbutil.closeCon(con);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}
+		});
 		jb_login.setBounds(52, 220, 91, 23);
 		contentPane.add(jb_login);
 		
