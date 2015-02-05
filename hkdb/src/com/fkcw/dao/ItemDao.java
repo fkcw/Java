@@ -2,6 +2,7 @@ package com.fkcw.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.fkcw.model.Item;
@@ -21,5 +22,10 @@ public class ItemDao {
 		pstmt.setString(7, item.getVendor());
 		pstmt.setDouble(8, item.getPrice());
 		return pstmt.executeUpdate();
+	}
+	public ResultSet itemsearch(Connection co) throws SQLException{
+		String sql = "SELECT * FROM tbl_item";
+		PreparedStatement pstmt = co.prepareStatement(sql);
+		return pstmt.executeQuery();
 	}
 }

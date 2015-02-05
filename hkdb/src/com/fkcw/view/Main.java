@@ -1,22 +1,15 @@
 package com.fkcw.view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
 import javax.swing.JMenu;
-import javax.swing.JButton;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
 
 public class Main extends JFrame {
 
@@ -73,9 +66,7 @@ public class Main extends JFrame {
 		JMenuItem menuItem_1 = new JMenuItem("产品信息更新");
 		menuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Ifrm_item_maintain mtview = new Ifrm_item_maintain();
-				mtview.setVisible(true);
-				Main.this.add(mtview);
+				
 			}
 		});
 		jmb_cpmaintain.add(menuItem_1);
