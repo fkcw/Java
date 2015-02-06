@@ -127,8 +127,8 @@ public class Frm_main_sub extends JFrame {
 			}
 		}
 		
-//		getContentPane().add(table, "cell 0 1,grow");
-//		getContentPane().add(table_1, "cell 1 1,grow");
+		getContentPane().add(table, "cell 0 1,grow");
+		getContentPane().add(table_1, "cell 1 1,grow");
 		new Timer(1000, taskRun).start();
 	}
 	
