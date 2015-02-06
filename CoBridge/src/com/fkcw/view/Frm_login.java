@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Timer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,7 +27,8 @@ public class Frm_login extends JFrame {
 	private JPasswordField userpasstxt;
 	private UserDao ud= new UserDao();
 	private DBUtil dbutil = new DBUtil();
-
+	private Timer timer;
+	ActionListener taskRun;
 	/**
 	 * Launch the application.
 	 */
@@ -84,6 +86,7 @@ public class Frm_login extends JFrame {
 						new Frm_main().setVisible(true);
 					}else{
 						JOptionPane.showMessageDialog(null, "Error");
+						return;
 					}
 					
 				} catch (ClassNotFoundException e) {
@@ -119,5 +122,6 @@ public class Frm_login extends JFrame {
 		userpasstxt = new JPasswordField();
 		userpasstxt.setBounds(182, 159, 86, 20);
 		contentPane.add(userpasstxt);
+	
 	}
 }

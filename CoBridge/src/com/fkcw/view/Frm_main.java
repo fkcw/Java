@@ -1,24 +1,25 @@
 package com.fkcw.view;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridBagLayout;
 import javax.swing.JTable;
+import javax.swing.Timer;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
 
 import com.fkcw.DBUtil.DBUtil;
 import com.fkcw.DBUtil.TBUtil;
 import com.fkcw.dao.TblDao;
-
-import java.awt.GridBagConstraints;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.awt.Color;
-import javax.swing.border.BevelBorder;
-import java.awt.Font;
 
 public class Frm_main extends JFrame {
 
@@ -27,6 +28,7 @@ public class Frm_main extends JFrame {
 	private DBUtil dbutil = new DBUtil();
 	private TBUtil tbutil = new TBUtil();
 	private TblDao tbdao = new TblDao();
+	Connection conn = null;
 	
 
 	/**
@@ -48,6 +50,31 @@ public class Frm_main extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	ActionListener taskRun = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			try {
+				conn = dbutil.getCon();
+				table.setModel(tbutil.rstotbm(tbdao.rtnordrs(conn)));
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}finally{
+				try {
+					dbutil.closeCon(conn);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			
+		}
+	};
+
 	public Frm_main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -65,7 +92,7 @@ public class Frm_main extends JFrame {
 		table.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.RED, Color.RED, Color.RED, Color.RED));
 		table.setBackground(Color.WHITE);
-		Connection conn = null;
+		
 		try {
 			conn = dbutil.getCon();
 			table.setModel(tbutil.rstotbm(tbdao.rtnordrs(conn)));
@@ -89,6 +116,10 @@ public class Frm_main extends JFrame {
 		gbc_table.gridx = 0;
 		gbc_table.gridy = 0;
 		contentPane.add(table, gbc_table);
+		
+		new Timer(1000, taskRun).start();
+		
 	}
+
 
 }
