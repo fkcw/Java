@@ -17,6 +17,7 @@ import net.miginfocom.swing.MigLayout;
 import com.fkcw.DBUtil.DBUtil;
 import com.fkcw.DBUtil.TBUtil;
 import com.fkcw.dao.TblDao;
+import javax.swing.JScrollPane;
 
 
 public class Frm_main_sub extends JFrame {
@@ -54,7 +55,7 @@ public class Frm_main_sub extends JFrame {
 			try {
 				con = dbutil.getCon();
 				table.setModel(tbutil.rstotbm(tbldao.rtnordrs(con)));
-				table_1.setModel(tbutil.rstotbm(tbldao.rtnordrs(con)));
+				table_1.setModel(tbutil.rstotbm(tbldao.rtrordrs(con)));
 			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -84,6 +85,7 @@ public class Frm_main_sub extends JFrame {
 		
 		lblResupply = new JLabel("Resupply");
 		lblResupply.setFont(new Font("Tahoma", Font.BOLD, 13));
+		getContentPane().add(lblResupply, "cell 1 0");
 		
 		//table init
 		table = new JTable();
@@ -107,10 +109,9 @@ public class Frm_main_sub extends JFrame {
 		}
 		
 		table_1 = new JTable();
-		getContentPane().add(lblResupply, "cell 1 0");
 		try {
 			con = dbutil.getCon();
-			table_1.setModel(tbutil.rstotbm(tbldao.rtnordrs(con)));
+			table_1.setModel(tbutil.rstotbm(tbldao.rtrordrs(con)));
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -126,8 +127,8 @@ public class Frm_main_sub extends JFrame {
 			}
 		}
 		
-		getContentPane().add(table, "cell 0 1,grow");
-		getContentPane().add(table_1, "cell 1 1,grow");
+//		getContentPane().add(table, "cell 0 1,grow");
+//		getContentPane().add(table_1, "cell 1 1,grow");
 		new Timer(1000, taskRun).start();
 	}
 	
