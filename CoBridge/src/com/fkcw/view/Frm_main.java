@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 import com.fkcw.DBUtil.DBUtil;
 import com.fkcw.DBUtil.TBUtil;
 import com.fkcw.dao.TblDao;
+import javax.swing.border.EtchedBorder;
 
 public class Frm_main extends JFrame {
 
@@ -79,7 +80,7 @@ public class Frm_main extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(1, 1, 1, 1));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0};
@@ -90,7 +91,7 @@ public class Frm_main extends JFrame {
 		
 		table = new JTable();
 		table.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		table.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.RED, Color.RED, Color.RED, Color.RED));
+		table.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		table.setBackground(Color.WHITE);
 		
 		try {
