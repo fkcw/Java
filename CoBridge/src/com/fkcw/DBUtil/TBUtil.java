@@ -60,13 +60,18 @@ public class TBUtil {
 	 * this for table format
 	 */
 	public void tblhandler(JTable tbl) {
+		tbl.getColumn("Date").setPreferredWidth(150);
 		tbl.getColumn("StoreName").setPreferredWidth(300);
+		tbl.getColumn("OrderNum").setPreferredWidth(100);
+		tbl.getColumn("Approved").setPreferredWidth(50);
+		tbl.getColumn("Comment").setPreferredWidth(400);
+
 		tbl.setRowHeight(25);
 		tbl.setFillsViewportHeight(true);
-		tbl.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
+		tbl.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 13));
 		//tbl.setBackground(Color.LIGHT_GRAY);
 		tbl.setEnabled(false);
-		tbl.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 18));
+		tbl.getTableHeader().setFont(new Font("Microsoft YaHei UI", Font.BOLD, 14));
 
 	}
 	/*

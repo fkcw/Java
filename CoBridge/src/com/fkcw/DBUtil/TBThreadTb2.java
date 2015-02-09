@@ -9,27 +9,30 @@ import javax.swing.table.TableModel;
 
 import com.fkcw.dao.TblDao;
 
-public class TBThread extends Thread {
+public class TBThreadTb2 extends Thread {
 	private static Connection con=null;
 	private static DBUtil dbutil= new DBUtil();
 	private static TBUtil tbutil= new TBUtil();
 	private static TblDao tbldao = new TblDao();
 	private static JTable tbl;
 	private static Vector<?> modelistrs= new Vector<Object>();
-
 	public JTable getTbl() {
 		return tbl;
 	}
 
+
 	public void setTbl(JTable tbl) {
-		TBThread.tbl = tbl;
+		TBThreadTb2.tbl = tbl;
 	}
+
+
+
 
 	public void run(){
 		while (true) {
 			try {
 				con = dbutil.getCon();
-				modelistrs =tbutil.rstotbm(tbldao.rttblnsrs(con));
+				modelistrs =tbutil.rstotbm(tbldao.rttblrsrs(con));
 
 			} catch (ClassNotFoundException e) {
 
