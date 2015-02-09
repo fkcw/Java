@@ -19,6 +19,7 @@ public class TBThread extends Thread {
 
 	public JTable getTbl() {
 		return tbl;
+		
 	}
 
 	public void setTbl(JTable tbl) {
@@ -29,13 +30,13 @@ public class TBThread extends Thread {
 		while (true) {
 			try {
 				con = dbutil.getCon();
+				modelistrs.clear();
 				modelistrs =tbutil.rstotbm(tbldao.rttblnsrs(con));
 
 			} catch (ClassNotFoundException e) {
 
 				e.printStackTrace();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}finally{
 				try {
@@ -45,24 +46,16 @@ public class TBThread extends Thread {
 					e.printStackTrace();
 				}
 			}
-//			for (int i = 0; i < modelistrs.size(); i++) {
-//				tbl.setModel((TableModel) modelistrs.get(i));
-//				tbutil.tblhandler(tbl);
-//				try {
-//					Thread.sleep(5500);
-//				} catch (InterruptedException e) {
-//
-//					e.printStackTrace();
-//				}
-//			}
+
 			for (Object e : modelistrs) {
 				tbl.setModel((TableModel) e);
 				tbutil.tblhandler(tbl);
 				try {
-					Thread.sleep(5500);
+					Thread.sleep(5000);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					System.out.println("th1 error");
 				}
 			}
 		}

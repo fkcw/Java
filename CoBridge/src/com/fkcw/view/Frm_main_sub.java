@@ -57,16 +57,16 @@ public class Frm_main_sub extends JFrame {
 		setTitle("Logistic Panel");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new MigLayout("wrap2", "[grow][grow]", "[][][grow]"));
+		getContentPane().setLayout(new MigLayout("wrap2", "[0:0, grow 50,fill][0:0, grow 50,fill]", "[][][]"));
 
 		JLabel lblNsSche = new JLabel("NS Schedule");
-		lblNsSche.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNsSche.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNsSche.setForeground(Color.BLACK);
 		lblNsSche.setFont(new Font("Tahoma", Font.BOLD, 21));
 		getContentPane().add(lblNsSche, "cell 0 0");
 
 		lblResupply = new JLabel("Resupply");
-		lblResupply.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblResupply.setHorizontalAlignment(SwingConstants.CENTER);
 		lblResupply.setForeground(Color.BLACK);
 		lblResupply.setFont(new Font("Tahoma", Font.BOLD, 21));
 		getContentPane().add(lblResupply, "cell 1 0");
@@ -75,14 +75,14 @@ public class Frm_main_sub extends JFrame {
 		table_1 = new JTable();
 
 		getContentPane().add(table.getTableHeader(),"cell 0 1,grow");
-//		getContentPane().add(table_1.getTableHeader(),"cell 1 1,grow");
+		getContentPane().add(table_1.getTableHeader(),"cell 1 1,grow");
 		getContentPane().add(table, "cell 0 2,grow");
 		getContentPane().add(table_1, "cell 1 2,grow");
 
 		tblthread.setTbl(table);
 		tblthread.start();
-//		tbl2thread.setTbl(table_1);
-//		tbl2thread.start();
+		tbl2thread.setTbl(table_1);
+		tbl2thread.start();
 	}
 
 }

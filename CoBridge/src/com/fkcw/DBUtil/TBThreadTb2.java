@@ -32,6 +32,7 @@ public class TBThreadTb2 extends Thread {
 		while (true) {
 			try {
 				con = dbutil.getCon();
+				modelistrs.clear();
 				modelistrs =tbutil.rstotbm(tbldao.rttblrsrs(con));
 
 			} catch (ClassNotFoundException e) {
@@ -48,14 +49,15 @@ public class TBThreadTb2 extends Thread {
 					e.printStackTrace();
 				}
 			}
-			for (int i = 0; i < modelistrs.size(); i++) {
-				tbl.setModel((TableModel) modelistrs.get(i));
+			for (Object e : modelistrs) {
+				tbl.setModel((TableModel) e);
 				tbutil.tblhandler(tbl);
 				try {
-					Thread.sleep(5500);
-				} catch (InterruptedException e) {
-
-					e.printStackTrace();
+					Thread.sleep(5000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					System.out.println("th2 error");
 				}
 			}
 		}

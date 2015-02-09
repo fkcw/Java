@@ -13,11 +13,12 @@ import javax.swing.table.TableModel;
 public class TBUtil {
 
 	public Vector<TableModel> rstotbm(ResultSet rs) throws SQLException{
+		TableModel tbm;
 		ResultSetMetaData rsmd = rs.getMetaData();
-		int numofcol = rsmd.getColumnCount();
-
 		Vector<String> nameofcol = new Vector<String>();
 		Vector<Vector<Object>> rows = new Vector<Vector<Object>>();
+		int numofcol = rsmd.getColumnCount();
+
 		for (int i = 0; i < numofcol; i++) {
 			nameofcol.addElement(rsmd.getColumnLabel(i+1));
 		}
@@ -31,13 +32,14 @@ public class TBUtil {
 		/**
 		 * split rows
 		 */
+
 		int numofrows = rows.size();
 		Vector<TableModel> rowsarr = new Vector<TableModel>();
-		TableModel tbm;
 		if (numofrows>30) {
 			int j =0;
 			int numofpager = numofrows/30;
-			for (int k = 0; k < numofpager; k++) {
+			int resetnum = numofrows - numofpager*30;
+			for (int p = 0; p < numofpager; p++) {
 				Vector<Vector<Object>> subarr = new Vector<Vector<Object>>();
 				for (int i = 0; i < 30; i++) {
 					subarr.addElement(rows.get(j++));	
@@ -45,7 +47,18 @@ public class TBUtil {
 				tbm=new DefaultTableModel(subarr,nameofcol);
 				rowsarr.addElement(tbm);
 			}
-
+			/*
+			 * add reset records to the last of array;
+			 */
+			Vector<Vector<Object>> subarrrest = new Vector<Vector<Object>>();
+			System.out.println(resetnum);
+			if (resetnum >0) {
+				for (int i = 0; i < resetnum; i++) {
+					subarrrest.addElement(rows.get(j++));
+				}
+				tbm = new DefaultTableModel(subarrrest,nameofcol);
+				rowsarr.addElement(tbm);
+			}
 			return rowsarr;
 		}else{
 			tbm=new DefaultTableModel(rows,nameofcol);
@@ -60,11 +73,7 @@ public class TBUtil {
 	 * this for table format
 	 */
 	public void tblhandler(JTable tbl) {
-		tbl.getColumn("Date").setPreferredWidth(150);
-		tbl.getColumn("StoreName").setPreferredWidth(300);
-		tbl.getColumn("OrderNum").setPreferredWidth(100);
-		tbl.getColumn("Approved").setPreferredWidth(50);
-		tbl.getColumn("Comment").setPreferredWidth(400);
+
 
 		tbl.setRowHeight(25);
 		tbl.setFillsViewportHeight(true);
