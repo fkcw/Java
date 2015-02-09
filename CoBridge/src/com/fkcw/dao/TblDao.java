@@ -7,14 +7,20 @@ import java.sql.SQLException;
 
 public class TblDao {
 	private ResultSet rs=null;
-	public ResultSet rtnordrs(Connection conn) throws SQLException{
-		String sql = "SELECT PROCODE,AREA,FACODE,CLASS,DES FROM tbl_item";
+	/*
+	 * return tbl_rs result
+	 */
+	public ResultSet rttblrsrs(Connection conn) throws SQLException{
+		String sql = "SELECT Date,StoreName,OrderNum ,Approved,Comment FROM tbl_rs ORDER BY Date";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		rs= pstmt.executeQuery();
 		return rs;
 	}
-	public ResultSet rtrordrs(Connection conn) throws SQLException{
-		String sql = "SELECT date,address,orderno,status,comment FROM tbl_rsord";
+	/*
+	 * return tbl_ns result
+	 */
+	public ResultSet rttblnsrs(Connection conn) throws SQLException{
+		String sql = "SELECT Date,StoreName,OrderNum,Approved,Comment FROM tbl_ns ORDER BY Date";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		rs= pstmt.executeQuery();
 		return rs;
