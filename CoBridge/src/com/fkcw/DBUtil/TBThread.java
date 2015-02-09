@@ -45,14 +45,24 @@ public class TBThread extends Thread {
 					e.printStackTrace();
 				}
 			}
-			for (int i = 0; i < modelistrs.size(); i++) {
-				tbl.setModel((TableModel) modelistrs.get(i));
+//			for (int i = 0; i < modelistrs.size(); i++) {
+//				tbl.setModel((TableModel) modelistrs.get(i));
+//				tbutil.tblhandler(tbl);
+//				try {
+//					Thread.sleep(5500);
+//				} catch (InterruptedException e) {
+//
+//					e.printStackTrace();
+//				}
+//			}
+			for (Object e : modelistrs) {
+				tbl.setModel((TableModel) e);
 				tbutil.tblhandler(tbl);
 				try {
 					Thread.sleep(5500);
-				} catch (InterruptedException e) {
-
-					e.printStackTrace();
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		}
