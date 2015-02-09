@@ -75,14 +75,14 @@ public class Frm_main_sub extends JFrame {
 		table_1 = new JTable();
 
 		getContentPane().add(table.getTableHeader(),"cell 0 1,grow");
-		getContentPane().add(table_1.getTableHeader(),"cell 1 1,grow");
+//		getContentPane().add(table_1.getTableHeader(),"cell 1 1,grow");
 		getContentPane().add(table, "cell 0 2,grow");
 		getContentPane().add(table_1, "cell 1 2,grow");
 
 		tblthread.setTbl(table);
 		tblthread.start();
-		tbl2thread.setTbl(table_1);
-		tbl2thread.start();
+//		tbl2thread.setTbl(table_1);
+//		tbl2thread.start();
 	}
 
 }
