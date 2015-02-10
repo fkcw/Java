@@ -87,10 +87,7 @@ public class TBUtil {
 	 * this for color rows
 	 */
 	public void tblpainter(JTable tbl){
-		int rownum = tbl.getRowCount();
 
-		for (int i = 1; i <= rownum; i++) {
-			System.out.println(i);
-		}
 	}
+
 }

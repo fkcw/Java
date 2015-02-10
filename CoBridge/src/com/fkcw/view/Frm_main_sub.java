@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.sql.Connection;
 import java.util.Vector;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -51,13 +52,14 @@ public class Frm_main_sub extends JFrame {
 
 
 	public Frm_main_sub() {
+		
 		setFont(new Font("Dialog", Font.BOLD, 12));
 		setForeground(Color.WHITE);
 		getContentPane().setBackground(Color.LIGHT_GRAY);
 		setTitle("Logistic Panel");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new MigLayout("wrap2", "[0:0, grow 50,fill][0:0, grow 50,fill]", "[][][]"));
+		getContentPane().setLayout(new MigLayout("wrap2", "[0:0, grow 50,fill][0:0, grow 50,fill]", "[][][grow]"));
 
 		JLabel lblNsSche = new JLabel("NS Schedule");
 		lblNsSche.setHorizontalAlignment(SwingConstants.CENTER);
@@ -74,10 +76,10 @@ public class Frm_main_sub extends JFrame {
 		table = new JTable();
 		table_1 = new JTable();
 
-		getContentPane().add(table.getTableHeader(),"cell 0 1,grow");
-		getContentPane().add(table_1.getTableHeader(),"cell 1 1,grow");
+//		getContentPane().add(table.getTableHeader(),"cell 0 1,grow 50");
+//		getContentPane().add(table_1.getTableHeader(),"cell 1 1,grow 50");
 		getContentPane().add(table, "cell 0 2,grow");
-		getContentPane().add(table_1, "cell 1 2,grow");
+//		getContentPane().add(table_1, "cell 1 2,grow");
 
 		tblthread.setTbl(table);
 		tblthread.start();

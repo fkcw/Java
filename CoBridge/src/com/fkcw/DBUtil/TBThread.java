@@ -1,5 +1,6 @@
 package com.fkcw.DBUtil;
 
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -49,6 +50,7 @@ public class TBThread extends Thread {
 
 			for (Object e : modelistrs) {
 				tbl.setModel((TableModel) e);
+				tbl.setDefaultRenderer(Object.class, new TBColor());
 				tbutil.tblhandler(tbl);
 				try {
 					Thread.sleep(5000);
